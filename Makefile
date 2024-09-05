@@ -17,6 +17,9 @@ start: ## Init project
 	$(MAKE) composer-install
 	@$(call GREEN, "The application is available at: http://127.0.0.1:8000/.")
 
+bash: ## Entrer dans le bash
+	$(DOCKER) exec -w /var/www/project -it my_custom_library bash
+
 cache-clear: ## Clear cache
 	$(SYMFONY_CONSOLE) cache:clear
 
