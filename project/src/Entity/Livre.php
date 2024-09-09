@@ -25,9 +25,6 @@ class Livre
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $langue = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_parution = null;
 
@@ -45,6 +42,9 @@ class Livre
 
     #[ORM\ManyToOne(inversedBy: 'livres')]
     private ?Editeur $editeur = null;
+
+    #[ORM\ManyToOne(inversedBy: 'livres')]
+    private ?Langue $langue = null;
 
     public function __construct()
     {
@@ -88,18 +88,6 @@ class Livre
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getLangue(): ?string
-    {
-        return $this->langue;
-    }
-
-    public function setLangue(string $langue): static
-    {
-        $this->langue = $langue;
 
         return $this;
     }
@@ -172,6 +160,18 @@ class Livre
     public function setEditeur(?Editeur $editeur): static
     {
         $this->editeur = $editeur;
+
+        return $this;
+    }
+
+    public function getLangue(): ?Langue
+    {
+        return $this->langue;
+    }
+
+    public function setLangue(?Langue $langue): static
+    {
+        $this->langue = $langue;
 
         return $this;
     }
