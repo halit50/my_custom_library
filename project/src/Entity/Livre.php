@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LivreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +36,20 @@ class Livre
 
     #[ORM\ManyToOne(inversedBy: 'livres')]
     private ?Genre $genre_id = null;
+
+    /**
+     * @var Collection<int, Auteur>
+     */
+    #[ORM\ManyToMany(targetEntity: Auteur::class, inversedBy: 'livres')]
+    private Collection $auteur;
+
+    #[ORM\ManyToOne(inversedBy: 'livres')]
+    private ?Editeur $editeur = null;
+
+    public function __construct()
+    {
+        $this->auteur = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +136,42 @@ class Livre
     public function setGenreId(?Genre $genre_id): static
     {
         $this->genre_id = $genre_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Auteur>
+     */
+    public function getAuteur(): Collection
+    {
+        return $this->auteur;
+    }
+
+    public function addAuteur(Auteur $auteur): static
+    {
+        if (!$this->auteur->contains($auteur)) {
+            $this->auteur->add($auteur);
+        }
+
+        return $this;
+    }
+
+    public function removeAuteur(Auteur $auteur): static
+    {
+        $this->auteur->removeElement($auteur);
+
+        return $this;
+    }
+
+    public function getEditeur(): ?Editeur
+    {
+        return $this->editeur;
+    }
+
+    public function setEditeur(?Editeur $editeur): static
+    {
+        $this->editeur = $editeur;
 
         return $this;
     }
