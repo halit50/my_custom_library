@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class LivreType extends AbstractType
 {
@@ -24,11 +25,11 @@ class LivreType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class)
-            ->add('image', TextType::class)
+            ->add('imageFile', VichImageType::class)
             ->add('description', TextareaType::class)
             ->add('langue', EntityType::class, [
                 'class' => Langue::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('date_parution', DateType::class, [
                 'widget' => 'single_text',
@@ -36,16 +37,17 @@ class LivreType extends AbstractType
             ->add('nombre_pages', IntegerType::class)
             ->add('genre_id', EntityType::class, [
                 'class' => Genre::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
+                'label' => 'Genre'
             ])
             ->add('auteur', EntityType::class, [
                 'class' => Auteur::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom prenom',
                 'multiple' => true,
             ])
             ->add('editeur', EntityType::class, [
                 'class' => Editeur::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter'        

@@ -29,6 +29,11 @@ class Langue
         $this->livres = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {   
+        return $this->getNom();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

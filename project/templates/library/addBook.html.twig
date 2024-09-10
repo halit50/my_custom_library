@@ -5,7 +5,104 @@
 {% block body %}
    
    <div class="container mt-5">
-    {{ form(form) }}
+    {{ form_start(form) }}
+    {{ form_row(form.titre) }}
+    {{ form_row(form.imageFile) }}
+    {{ form_row(form.description) }}
+    <div class="langue_row">
+      <div class="langue_label">
+        {{ form_label(form.langue)}} 
+        <a href="#" data-bs-toggle="modal" data-bs-target="#langueModal">
+          <i class="fa-solid fa-plus" title="Ajouter une langue"></i>
+        </a>
+      </div>
+      <div class="langue_input">
+        {{ form_widget(form.langue)}}
+      </div>
+    
+    </div>
+    {{ form_row(form.date_parution) }}
+    {{ form_row(form.nombre_pages) }}
+    <div class="genre_row">
+      <div class="genre_label">
+        {{ form_label(form.genre_id)}}
+        <a href="#" data-bs-toggle="modal" data-bs-target="#genreModal">
+            <i class="fa-solid fa-plus" title="Ajouter un genre"></i>
+        </a> 
+      </div>
+      <div class="genre_input">
+        {{ form_widget(form.genre_id)}}
+      </div>
+    </div>
+    <div class="auteur_row">
+      <div class="auteur_label">
+        {{ form_label(form.auteur)}} 
+        <i class="fa-solid fa-plus" title="Ajouter un auteur"></i>
+      </div>
+      <div class="auteur_input">
+        {{ form_widget(form.auteur)}}
+      </div>
+    </div>
+    <div class="editeur_row">
+      <div class="editeur_label">
+        {{ form_label(form.editeur)}}
+        <a href="#" data-bs-toggle="modal" data-bs-target="#editeurModal">
+          <i class="fa-solid fa-plus" title="Ajouter un éditeur"></i>
+        </a> 
+      </div>
+      <div class="editeur_input">
+        {{ form_widget(form.editeur)}}
+      </div>
+    </div>
+    {{ form_row(form.submit) }}
+
+    {{ form_end(form)}}
    </div>
+
+       <!-- Langue Modal-->
+<div class="modal fade" id="langueModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="langueModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ form(langue_form)}}
+      </div>
+    </div>
+  </div>
+</div>
+
+       <!-- Genre Modal-->
+  <div class="modal fade" id="genreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="genreModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ form(genre_form)}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Editeur Modal-->
+ <div class="modal fade" id="editeurModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editeurModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ form(editeur_form)}}
+      </div>
+    </div>
+  </div>
+</div>
+        
 
  {% endblock %}
