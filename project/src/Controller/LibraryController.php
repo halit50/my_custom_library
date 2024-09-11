@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Auteur;
 use App\Entity\Editeur;
 use App\Entity\Genre;
 use App\Entity\Langue;
@@ -9,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Livre;
+use App\Form\AuteurType;
 use App\Form\EditeurType;
 use App\Form\GenreType;
 use App\Form\LangueType;
@@ -33,7 +35,10 @@ class LibraryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            dd($form);
+            $em->persist($livre);
+            $em->flush();
+            $this->addFlash('livre', 'Votre livre a bien été ajouté à votre bibliothèque');
+            return $this->redirectToRoute('app_library');
         }
 
         $langue = new Langue();
@@ -65,6 +70,16 @@ class LibraryController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('app_library_add');
         }
+
+        $auteur = new Auteur();
+        $auteur_form = $this->createForm(AuteurType::class, $auteur);
+        $auteur_form->handleRequest($request);
+
+        if ($auteur_form->isSubmitted() && $auteur_form->isValid()) {
+            $em->persist($auteur);
+            $em->flush();
+            return $this->redirectToRoute('app_library_add');
+        }
         
 
         return $this->render('library/addBook.html.twig', [
@@ -72,6 +87,7 @@ class LibraryController extends AbstractController
             'langue_form' => $langue_form->createView(),
             'genre_form' => $genre_form->createView(),
             'editeur_form' => $editeur_form->createView(),
+            'auteur_form' => $auteur_form->createView(),
         ]);
     }
     
