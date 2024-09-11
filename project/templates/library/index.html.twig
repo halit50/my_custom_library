@@ -3,9 +3,14 @@
 {% block title %}Ma librairie{% endblock %}
 
 {% block body %}
+{% for message in app.flashes('livre') %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <div class="container mt-5">
-  <button type="button" class="btn btn-info float-end">Ajouter un livre</button>
+  <a href="{{ path('app_library_add') }}" class="btn btn-info float-end">Ajouter un livre</a>
   <table class="table mt-3">
   <thead>
     <tr>
