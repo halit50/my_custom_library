@@ -4,7 +4,7 @@
 
 {% block body %}
 {% for message in app.flashes('livre') %}
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success container" role="alert">
         {{ message }}
     </div>
 {% endfor %}
@@ -19,16 +19,37 @@
       <th scope="col">Auteur</th>
       <th scope="col">Genre</th>
       <th scope="col">Langue</th>
+      <th scope="col">Nombre de pages</th>
+      <th scope="col">
+        
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row"><img src="https://img.freepik.com/vecteurs-premium/illustration-icone-test_430232-32.jpg" class="rounded-circle" alt="..." style="width: 70px; height: 70px;"></th>
-      <td style="vertical-align: middle;">Games of Thrones</td>
-      <td style="vertical-align: middle;">George R.R Martin</td>
-      <td style="vertical-align: middle;">Sciences Fiction</td>
-      <td style="vertical-align: middle;">Français</td>
-    </tr>
+  {% if livres is not empty %}
+    {% for livre in livres%}
+      <tr>
+        <th scope="row"><img src="{{ vich_uploader_asset(livre, 'imageFile')}}" class="rounded-circle" alt="..." style="width: 70px; height: 70px;"></th>
+        <td style="vertical-align: middle;">{{ livre.titre }}</td>
+        <td style="vertical-align: middle;">{% for auteur in livre.auteur %} {{auteur.prenom }} {{ auteur.nom }} </br> {% endfor %}</td>
+        <td style="vertical-align: middle;"> {{ livre.genreId.nom }}</td>
+        <td style="vertical-align: middle;">{{ livre.langue.nom }}</td>
+        <td style="vertical-align: middle;">{{ livre.nombrePages }}</td>
+        <td style="vertical-align: middle;">
+          <button type="button" class="btn btn-info">
+            Modifier
+          </button>
+          <button type="button" class="btn btn-danger">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+    {% endfor %}
+  {% else %}
+  <tr>
+    <td colspan="6" style="text-align: center;">Aucun livre dans votre bibliothèque.</td>
+  </tr>
+  {% endif %}
   </tbody>
 </table>
 </div>
