@@ -15,15 +15,20 @@ use App\Form\EditeurType;
 use App\Form\GenreType;
 use App\Form\LangueType;
 use App\Form\LivreType;
+use App\Repository\LivreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class LibraryController extends AbstractController
 {
     #[Route('/library', name: 'app_library')]
-    public function index(): Response
+    public function index(LivreRepository $livreRepository): Response
     {
-        return $this->render('library/index.html.twig');
+        $livres = $livreRepository->findAll();
+
+        return $this->render('library/index.html.twig', [
+            'livres' => $livres,
+        ]);
     }
 
     #[Route('/library/add', name: 'app_library_add')]
