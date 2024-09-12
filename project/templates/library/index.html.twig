@@ -36,12 +36,12 @@
         <td style="vertical-align: middle;">{{ livre.langue.nom }}</td>
         <td style="vertical-align: middle;">{{ livre.nombrePages }}</td>
         <td style="vertical-align: middle;">
-          <button type="button" class="btn btn-info">
+          <a href="{{ path('app_library_edit', {id: livre.id}) }}" class="btn btn-info">
             Modifier
-          </button>
-          <button type="button" class="btn btn-danger">
+          </a>
+          <a href="{{ path('app_library_delete', {id: livre.id}) }}" class="btn btn-danger">
             Supprimer
-          </button>
+          </a>
         </td>
       </tr>
     {% endfor %}
