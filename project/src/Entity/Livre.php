@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LivreRepository::class)]
 #[Vich\Uploadable]
@@ -20,6 +21,11 @@ class Livre
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        minMessage: 'Le titre doit comporter au moins {{ limit }} caractères',
+    )]
     private ?string $titre = null;
 
     #[Vich\UploadableField(mapping: 'book_image', fileNameProperty: 'image')]
@@ -35,21 +41,26 @@ class Livre
     private ?\DateTimeInterface $date_parution = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?int $nombre_pages = null;
 
     #[ORM\ManyToOne(inversedBy: 'livres')]
+    #[Assert\NotBlank]
     private ?Genre $genre_id = null;
 
     /**
      * @var Collection<int, Auteur>
      */
     #[ORM\ManyToMany(targetEntity: Auteur::class, inversedBy: 'livres')]
+    #[Assert\NotBlank]
     private Collection $auteur;
 
     #[ORM\ManyToOne(inversedBy: 'livres')]
+    #[Assert\NotBlank]
     private ?Editeur $editeur = null;
 
     #[ORM\ManyToOne(inversedBy: 'livres')]
+    #[Assert\NotBlank]
     private ?Langue $langue = null;
 
     #[ORM\Column(nullable: true)]

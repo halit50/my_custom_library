@@ -5,6 +5,9 @@
 {% block body %}
    
    <div class="container mt-5">
+    <div class="retour text-end">
+      <a href="{{ path('app_library') }}">Retour</a>
+    </div>
     {{ form_start(form) }}
     {{ form_row(form.titre) }}
     {{ form_row(form.imageFile) }}

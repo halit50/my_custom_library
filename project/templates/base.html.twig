@@ -27,7 +27,7 @@
     <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark {% if app.request.pathInfo == '/' %} fixed-top {% endif %}" id="mainNav" style="{% if app.request.pathInfo != '/' %} background-color: #212529 {% endif %}">
             <div class="container">
-                <a class="navbar-brand" href="#page-top">Accueil</a>
+                <a class="navbar-brand" href="{{ path('app.home') }}">Accueil</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>

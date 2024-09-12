@@ -6,6 +6,7 @@ use App\Repository\LangueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LangueRepository::class)]
 class Langue
@@ -16,6 +17,11 @@ class Langue
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        minMessage: 'Le nom doit comporter au moins {{ limit }} caractères',
+    )]
     private ?string $nom = null;
 
     /**
