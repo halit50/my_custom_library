@@ -95,5 +95,36 @@ class LibraryController extends AbstractController
             'auteur_form' => $auteur_form->createView(),
         ]);
     }
+
+    #[Route('/library/delete/{id}', name: 'app_library_delete')]
+    public function deleteBook($id, LivreRepository $livreRepository, EntityManagerInterface $em): Response
+    {
+        $livre = $livreRepository->find($id);
+
+        $em->remove($livre);
+        $em->flush();
+
+        return $this->redirectToRoute('app_library');
+    }
+
+    #[Route('/library/edit/{id}', name:'app_library_edit')]
+    public function updateBook($id, LivreRepository $livreRepository, EntityManagerInterface $em, Request $request): Response
+    {
+        $livre = $livreRepository->find($id);
+        $form = $this->createForm(LivreType::class, $livre);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('livre', 'Votre livre a bien été modifié');
+            return $this->redirectToRoute('app_library');
+        }
+        
+        return $this->render('/library/updateBook.html.twig', [
+            'livre' => $livre,
+            'form' => $form->createView()
+        ]);
+    }
     
 }

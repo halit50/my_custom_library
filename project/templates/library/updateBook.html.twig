@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'un livre{% endblock %}
+
+{% block body %}
+ <div class="container mt-5">
+    <div class="retour text-end">
+      <a href="{{ path('app_library') }}">Retour</a>
+    </div>
+    {{ form_start(form) }}
+    {{ form_row(form.titre) }}
+    <!-- <div class="image_row">
+        <div class="image-label">
+             {{ form_label(form.imageFile) }}
+        </div>
+        <div class="image-input">
+            {{ form_widget(form.imageFile)}}
+        </div>
+        
+    </div> -->
+    {{ form_row(form.description) }}
+    <div class="langue_row">
+      <div class="langue_label">
+        {{ form_label(form.langue)}} 
+      </div>
+      <div class="langue_input">
+        {{ form_widget(form.langue)}}
+      </div>
+    
+    </div>
+    {{ form_row(form.date_parution) }}
+    {{ form_row(form.nombre_pages) }}
+    <div class="genre_row">
+      <div class="genre_label">
+        {{ form_label(form.genre_id)}}
+      </div>
+      <div class="genre_input">
+        {{ form_widget(form.genre_id)}}
+      </div>
+    </div>
+    <div class="auteur_row">
+      <div class="auteur_label">
+        {{ form_label(form.auteur)}} 
+      </div>
+      <div class="auteur_input">
+        {{ form_widget(form.auteur)}}
+      </div>
+    </div>
+    <div class="editeur_row">
+      <div class="editeur_label">
+        {{ form_label(form.editeur)}}
+      </div>
+      <div class="editeur_input">
+        {{ form_widget(form.editeur)}}
+      </div>
+    </div>
+    <div class="text-end mt-4">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+    </div>
+
+    <div class="d-none">
+        {{ form_row(form.submit)}}
+    </div>
+
+    {{ form_end(form)}}
+   </div>
+{% endblock %}
