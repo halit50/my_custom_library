@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AuteurRepository::class)]
 #[Vich\Uploadable]
@@ -20,12 +21,27 @@ class Auteur
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        minMessage: 'Le nom doit comporter au moins {{ limit }} caractères',
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        minMessage: 'Le prénom doit comporter au moins {{ limit }} caractères',
+    )]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        minMessage: 'Le nationalité doit comporter au moins {{ limit }} caractères',
+    )]
     private ?string $nationalite = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
