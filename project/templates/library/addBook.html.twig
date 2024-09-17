@@ -6,7 +6,7 @@
    
    <div class="container mt-5">
     <div class="retour text-end">
-      <a href="{{ path('app_library') }}">Retour</a>
+      <a href="{{ path('app_library') }}" class="link">Retour</a>
     </div>
     {{ form_start(form) }}
     {{ form_row(form.titre) }}
@@ -59,7 +59,9 @@
         {{ form_widget(form.editeur)}}
       </div>
     </div>
-    {{ form_row(form.submit) }}
+    <div class="text-center">
+      {{ form_row(form.submit) }}
+    </div>
 
     {{ form_end(form)}}
    </div>
@@ -69,11 +71,18 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="langueModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="langueModalLabel">Ajouter une langue</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        {{ form(langue_form)}}
+        {{ form_start(langue_form)}}
+        <div class="langue-form-row-nom">
+          {{ form_row(langue_form.nom) }}
+        </div>
+        <div class="text-center">
+          {{ form_row(langue_form.submit)}}
+        </div>
+        {{ form_end(langue_form)}}
       </div>
     </div>
   </div>
@@ -84,11 +93,21 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="genreModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="genreModalLabel">Ajouter un genre</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        {{ form(genre_form)}}
+        {{ form_start(genre_form)}}
+        <div class="genre-form-row-nom">
+          {{ form_row(genre_form.nom) }}
+        </div>
+        <div class="genre-form-row-description">
+          {{ form_row(genre_form.description) }}
+        </div>
+        <div class="text-center">
+          {{ form_row(genre_form.submit)}}
+        </div>
+        {{ form_end(genre_form)}}
       </div>
     </div>
   </div>
@@ -99,11 +118,18 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="editeurModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="editeurModalLabel">Ajouter un éditeur</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        {{ form(editeur_form)}}
+        {{ form_start(editeur_form)}}
+        <div class="editeur-form-row-nom">
+          {{ form_row(editeur_form.nom) }}
+        </div>
+        <div class="editeur-form-row-submit text-center">
+          {{ form_row(editeur_form.submit) }}
+        </div>
+        {{ form_end(editeur_form)}}
       </div>
     </div>
   </div>
@@ -114,11 +140,21 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="auteurModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="auteurModalLabel">Ajouter un auteur</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        {{ form(auteur_form)}}
+        {{ form_start(auteur_form)}}
+          {{ form_row(auteur_form.nom)}}
+          {{ form_row(auteur_form.prenom)}}
+          {{ form_row(auteur_form.nationalite)}}
+          {{ form_row(auteur_form.biographie)}}
+          {{ form_row(auteur_form.date_naissance)}}
+          {{ form_row(auteur_form.imageFile)}}
+          <div class="text-center">
+            {{ form_row(auteur_form.submit) }}
+          </div>
+        {{ form_end(auteur_form)}}
       </div>
     </div>
   </div>

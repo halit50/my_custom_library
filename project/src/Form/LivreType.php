@@ -69,7 +69,11 @@ class LivreType extends AbstractType
                 'required' => true
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Ajouter'        
+                'label' => 'Ajouter',
+                'attr' => [
+                    'class' => 'btn rounded-pill mt-4',
+                    'style' => 'background-color: #FA8072; color: white; '
+                ],       
             ])
         ;
     }

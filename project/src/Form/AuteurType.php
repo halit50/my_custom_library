@@ -24,7 +24,13 @@ class AuteurType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('imageFile', VichImageType::class)
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Ajouter',
+                'attr' => [
+                    'class' => 'btn rounded-pill',
+                    'style' => 'background-color: #FA8072; color: white; '
+                ],
+            ])
         ;
     }
 
