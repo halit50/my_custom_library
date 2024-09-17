@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - Ma bibliothèque en ligne{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    {{ form_start(form)}}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom)}}
+        {{ form_row(form.email)}}
+        {{ form_row(form.password)}}
+        <div class="text-center">
+            {{ form_row(form.submit)}}
+        </div>
+    {{ form_end(form)}}
+</div>
+
+{% endblock %}
