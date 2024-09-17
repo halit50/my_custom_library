@@ -16,7 +16,13 @@ class GenreType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('description', TextType::class)
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Ajouter',
+                'attr' => [
+                    'class' => 'btn rounded-pill',
+                    'style' => 'background-color: #FA8072; color: white; '
+                ],
+            ])
         ;
     }
 

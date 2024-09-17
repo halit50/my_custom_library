@@ -4,13 +4,14 @@
 
 {% block body %}
 {% for message in app.flashes('livre') %}
-    <div class="alert alert-success container" role="alert">
+    <div class="alert alert-success alerte-dismissible container" role="alert">
         {{ message }}
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 {% endfor %}
 
 <div class="container mt-5">
-  <a href="{{ path('app_library_add') }}" class="btn btn-info float-end">Ajouter un livre</a>
+  <a href="{{ path('app_library_add') }}" class="btn float-end rounded-pill ajout-livre-btn">Ajouter un livre</a>
   <table class="table mt-3">
   <thead>
     <tr>
@@ -36,10 +37,10 @@
         <td style="vertical-align: middle;">{{ livre.langue.nom }}</td>
         <td style="vertical-align: middle;">{{ livre.nombrePages }}</td>
         <td style="vertical-align: middle;">
-          <a href="{{ path('app_library_edit', {id: livre.id}) }}" class="btn btn-info">
+          <a href="{{ path('app_library_edit', {id: livre.id}) }}" class="btn rounded-pill modifier-livre-btn">
             Modifier
           </a>
-          <a href="{{ path('app_library_delete', {id: livre.id}) }}" class="btn btn-danger">
+          <a href="{{ path('app_library_delete', {id: livre.id}) }}" class="btn rounded-pill supprimer-livre-btn">
             Supprimer
           </a>
         </td>
