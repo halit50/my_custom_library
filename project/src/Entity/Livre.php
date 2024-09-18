@@ -66,6 +66,9 @@ class Livre
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'livres')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->auteur = new ArrayCollection();
@@ -208,6 +211,18 @@ class Livre
     public function setLangue(?Langue $langue): static
     {
         $this->langue = $langue;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
