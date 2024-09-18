@@ -17,14 +17,16 @@ use App\Form\LangueType;
 use App\Form\LivreType;
 use App\Repository\LivreRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 class LibraryController extends AbstractController
 {
     #[Route('/library', name: 'app_library')]
-    public function index(LivreRepository $livreRepository): Response
+    public function index(LivreRepository $livreRepository, Security $security): Response
     {
-        $livres = $livreRepository->findAll();
+        $user = $security->getUser();
+        $livres = $livreRepository->findByUser($user->getId());
 
         return $this->render('library/index.html.twig', [
             'livres' => $livres,
@@ -32,7 +34,7 @@ class LibraryController extends AbstractController
     }
 
     #[Route('/library/add', name: 'app_library_add')]
-    public function addBook(Request $request, EntityManagerInterface $em): Response
+    public function addBook(Request $request, EntityManagerInterface $em, Security $security): Response
     {
         $livre = new Livre();
 
@@ -40,6 +42,8 @@ class LibraryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+            $user = $security->getUser();
+            $livre->setUser($user);
             $em->persist($livre);
             $em->flush();
             $this->addFlash('livre', 'Votre livre a bien été ajouté à votre bibliothèque');
