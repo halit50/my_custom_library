@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="masthead-subheading">Bienvenue dans votre bibliothèque en ligne</div>
                 <div class="masthead-heading text-uppercase">Heureux de vous revoir</div>
-                <a class="btn btn-xl text-uppercase rounded-pill connect-btn" href="{{ path('app_library') }}">Se connecter</a>
+                <a class="btn btn-xl text-uppercase rounded-pill connect-btn" href="{{ path('app_library') }}">{% if not app.user %}Se connecter {% else %} Aller à mon espace personnel {% endif %}</a>
             </div>
         </header>
         <!-- Services-->
