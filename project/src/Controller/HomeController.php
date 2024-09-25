@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ContactType;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -25,23 +26,31 @@ class HomeController extends AbstractController
             $numero = $form->getData()['numero'];
             $message = $form->getData()['message'];
             $objet = $form->getData()['objet'];
+            $mailFrom= $this->getParameter('mail_from');
+            $mailTo = $this->getParameter('mail_to');
 
-            //dd($form->getData());
 
-            $mail = (new Email())
-            ->from($email)
-            ->to('bruppaulujeda-1936@yopmail.com')
+            $mail = (new TemplatedEmail())
+            ->from($mailFrom)
+            ->to($mailTo)
+            ->replyTo($email)
             ->subject($objet)
-            ->text($message);
-
-    
+            ->htmlTemplate('email/email.html.twig')
+            ->context([
+                'nom' => $nom,
+                'mail' => $email,
+                'numero' => $numero,
+               'message' => $message,
+            ]);
 
             try {
                
                 $mailer->send($mail);
+                $this->addFlash('success','Votre email a bien été envoyé');
             
             } catch (\Exception $e) {
                 // En cas d'erreur, affichez le message pour investiguer.
+                $this->addFlash('notsuccess',"Votre email n'a pas pu être envoyé, veuillez réessayer ultérieurement s'il vous plait");
                 dd($e->getMessage());
             }
 
