@@ -4,6 +4,14 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    mail_from: '%env(MAIL_FROM)%'
+    mail_to: '%env(MAIL_TO)%'
+
+    # Use Symfony's built-in translation service
+    # https://symfony.com/doc/current/translation.html
+
+    # Use environment variables for sensitive parameters
+    # https://symfony.com/doc/current/configuration/external_parameters.html#using-environment-variabl
 
 services:
     # default configuration for services in *this* file
