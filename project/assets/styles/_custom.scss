@@ -21,3 +21,21 @@
 #mainNav .navbar-nav .nav-item .nav-link:hover {
     color: #FA8072 !important;
 }
+
+.livre-description{
+    min-height: 120px;
+    max-height: 120px;
+}
+
+.paginator ul {
+    justify-content: center;
+}
+
+.paginator a {
+    color: #FA8072 !important;
+}
+
+.paginator span {
+    background-color: #FA8072!important;
+    border-color: #FA8072!important;
+}
