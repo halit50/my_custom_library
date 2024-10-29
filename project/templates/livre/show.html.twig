@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ livre.titre}} - Ma bibliothèque en ligne{% endblock %}
+
+{% block body %}
+
+<div class="card mb-3 mt-4 show-card">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img style="height: 100%; width: 100%" src="https://www.cloudnetcare.fr/wp-content/uploads/2022/06/les-differents-types-de-test-d-un-logiciel.webp" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body text-center">
+        <h5 class="card-title"><strong>{{ livre.titre }}</strong></h5>
+        <p class="card-text">{{ livre.description }}</p>
+        <p class="card-text"><strong>Nombres de pages: </strong> {{ livre.nombrePages }}</p>
+        <p class="card-text">
+        <strong> Editeur: </strong>
+          {{ livre.editeur.nom}}
+        </p>
+        <p class="card-text"><strong> Genre: </strong>{{ livre.genreId.nom }}</p>
+        <p class="card-text"><strong> Langue: </strong>{{ livre.langue.nom }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="text-center">
+  <a class="btn btn-success rounded-pill add-fav-button">Ajouter a mes favoris</a>
+</div>
+
+{% endblock %}

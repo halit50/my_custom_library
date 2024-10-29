@@ -13,7 +13,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ livre.titre }}</h5>
         <p class="card-text livre-description">{{ livre.description }}</p>
-        <a href="" class="btn rounded-pill modifier-livre-btn"> Consulter </a>
+        <a href="{{ path('app_livre_show', {id: livre.id})}}" class="btn rounded-pill modifier-livre-btn"> Consulter </a>
       </div>
     </div>
   </div>

@@ -26,4 +26,14 @@ class LivreController extends AbstractController
             'livres' => $livresWithPaginator,
         ]);
     }
+
+    #[Route('/nos-livres/{id}', name: 'app_livre_show')]
+    public function show($id, LivreRepository $livreRepository): Response
+    {
+        $livre = $livreRepository->find($id);
+
+        return $this->render('livre/show.html.twig', [
+            'livre' => $livre,
+        ]);
+    }
 }
